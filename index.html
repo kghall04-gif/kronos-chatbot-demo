@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>AI Receptionist Demo — Kronos AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -95,7 +95,7 @@
 
     .biz-name {
       font-family: 'Syne', sans-serif;
-      font-size: 32px;
+      font-size: clamp(24px, 5vw, 42px);
       font-weight: 800;
       line-height: 1.1;
       color: var(--text);
@@ -110,7 +110,7 @@
     }
 
     .biz-tagline {
-      font-size: 13px;
+      font-size: clamp(14px, 2vw, 18px);
       color: var(--text-muted);
       margin-bottom: 36px;
     }
@@ -406,6 +406,7 @@
 
     #userInput {
       flex: 1;
+      min-width: 0;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -439,32 +440,60 @@
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
+      html, body { height: auto; }
+
       .demo-banner { font-size: 11px; padding: 8px 12px; }
 
       .layout {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        height: calc(100vh - 38px);
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
       }
 
       .left {
+        width: 100%;
         padding: 24px 20px;
+        text-align: center;
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
 
-      .brand-logo { margin-bottom: 24px; }
-      .biz-name { font-size: 26px; }
+      .right {
+        width: 100%;
+        height: 70vh;
+        min-height: 500px;
+      }
+
+      .brand-logo { margin-bottom: 24px; justify-content: center; }
       .biz-tagline { margin-bottom: 20px; }
-      .badges { flex-direction: row; flex-wrap: wrap; }
-      .badge { flex: 1; min-width: 130px; }
+      .phone-block { justify-content: center; }
+
+      .badges {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .badge { flex: 1 1 120px; min-width: 0; }
+
       .stats { margin-bottom: 20px; }
       .left-footer { padding-top: 16px; }
 
       .chat-header { padding: 14px 18px; }
-      .messages { padding: 18px; }
-      .quick-replies { padding: 0 18px 12px; }
-      .chat-input-area { padding: 14px 18px; }
+      .messages { padding: 16px; }
+
+      .quick-replies {
+        padding: 0 16px 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .qr-btn {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .chat-input-area { padding: 12px 16px; }
     }
   </style>
 </head>
